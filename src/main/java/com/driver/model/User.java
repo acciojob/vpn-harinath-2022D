@@ -10,11 +10,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String userName;
+    private String username;
     private String password;
     private String originalIp;
     private String maskedIp;
-    private boolean connected;
+    private Boolean connected;
 
     @ManyToMany
     @JoinColumn
@@ -24,7 +24,7 @@ public class User {
     private List<Connection> connectionList = new ArrayList<>();
 
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
-    private Country country;
+    private Country OriginalCountry;
 
     public int getId() {
         return id;
@@ -34,12 +34,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getPassword() {
@@ -66,7 +66,7 @@ public class User {
         this.maskedIp = maskedIp;
     }
 
-    public boolean isConnected() {
+    public boolean getConnected() {
         return connected;
     }
 
@@ -90,11 +90,11 @@ public class User {
         this.connectionList = connectionList;
     }
 
-    public Country getCountry() {
-        return country;
+    public Country getOriginalCountry() {
+        return OriginalCountry;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setOriginalCountry(Country originalCountry) {
+        this.OriginalCountry = originalCountry;
     }
 }
