@@ -1,40 +1,35 @@
 // Note: Do not write @Enumerated annotation above CountryName in this model.
 package com.driver.model;
 
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "COUNTRIES")
 public class Country {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String code;
+    private Integer id;
+
     private CountryName countryName;
+
+    private String code;
+
+    @OneToOne
+    private User user;
 
     @ManyToOne
     @JoinColumn
     private ServiceProvider serviceProvider;
 
-    @OneToOne
-    @JoinColumn
-    private User user;
-
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public CountryName getCountryName() {
@@ -45,12 +40,12 @@ public class Country {
         this.countryName = countryName;
     }
 
-    public ServiceProvider getServiceProvider() {
-        return serviceProvider;
+    public String getCode() {
+        return code;
     }
 
-    public void setServiceProvider(ServiceProvider serviceProvider) {
-        this.serviceProvider = serviceProvider;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public User getUser() {
@@ -59,5 +54,13 @@ public class Country {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public ServiceProvider getServiceProvider() {
+        return serviceProvider;
+    }
+
+    public void setServiceProvider(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
     }
 }

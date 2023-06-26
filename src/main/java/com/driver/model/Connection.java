@@ -1,37 +1,31 @@
 package com.driver.model;
 
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = " CONNECTIONS")
 public class Connection {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @ManyToOne
-    @JoinColumn
-    private ServiceProvider serviceProvider;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn
     private User user;
 
+    @ManyToOne
+    @JoinColumn
+    private ServiceProvider serviceProvider;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public ServiceProvider getServiceProvider() {
-        return serviceProvider;
-    }
-
-    public void setServiceProvider(ServiceProvider serviceProvider) {
-        this.serviceProvider = serviceProvider;
     }
 
     public User getUser() {
@@ -40,5 +34,13 @@ public class Connection {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public ServiceProvider getServiceProvider() {
+        return serviceProvider;
+    }
+
+    public void setServiceProvider(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
     }
 }

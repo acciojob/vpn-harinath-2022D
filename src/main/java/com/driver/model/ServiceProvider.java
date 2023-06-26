@@ -1,36 +1,39 @@
 package com.driver.model;
 
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "SERVICE_PROVIDERS")
 public class ServiceProvider {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+
     private String name;
 
     @ManyToOne
     @JoinColumn
     private Admin admin;
 
-    @OneToMany(mappedBy = "serviceProvider",cascade = CascadeType.ALL)
-    private List<Connection> connectionList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "serviceProvider",cascade = CascadeType.ALL)
-    private List<Country> countryList = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "serviceProviderList",cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "serviceProviderList", cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
 
+    @OneToMany(mappedBy = "serviceProvider", cascade = CascadeType.ALL)
+    private List<Connection> connectionList = new ArrayList<>();
 
-    public int getId() {
+    @OneToMany(mappedBy = "serviceProvider", cascade = CascadeType.ALL)
+    private List<Country> countryList = new ArrayList<>();
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -50,6 +53,14 @@ public class ServiceProvider {
         this.admin = admin;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     public List<Connection> getConnectionList() {
         return connectionList;
     }
@@ -64,13 +75,5 @@ public class ServiceProvider {
 
     public void setCountryList(List<Country> countryList) {
         this.countryList = countryList;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 }
